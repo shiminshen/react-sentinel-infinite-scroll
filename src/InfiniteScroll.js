@@ -34,6 +34,7 @@ export const useInfiniteScroll = ({ topCallback, bottomCallback }) => {
       topCallback && topCallback(listRef, topSentinelRef, setIsFetching)
     }
   })
+
   const bottomSentinelRef = useSentinel(
     (onScreen, isFetching, setIsFetching) => {
       if (!isFetching && onScreen) {
