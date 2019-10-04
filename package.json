@@ -20,7 +20,7 @@
     "publish:npm": "rm -rf lib/* && NODE_ENV=production babel src/SentinelInfiniteScroll --out-dir lib --copy-files",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "echo skip",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
