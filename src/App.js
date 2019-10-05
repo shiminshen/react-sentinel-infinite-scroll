@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
@@ -44,8 +44,6 @@ const InfiniteScrollExample = () => {
       setIsFetching(false)
     })
   }
-
-  const [enable, setEnable] = useState(false)
 
   const { listRef, topSentinelRef, bottomSentinelRef } = useInfiniteScroll({
     topOffset: 30,
