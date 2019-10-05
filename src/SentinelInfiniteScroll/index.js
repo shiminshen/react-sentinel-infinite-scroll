@@ -24,8 +24,10 @@ export const useSentinel = (callback, observerOptions) => {
 }
 
 export const useInfiniteScroll = ({
+  topOffset,
   topCallback,
   topObserverOptions,
+  bottomOffset,
   bottomCallback,
   bottomObserverOptions
 }) => {
@@ -49,13 +51,42 @@ export const useInfiniteScroll = ({
     bottomObserverOptions
   )
 
+  // layout offset while did mount if necessary
+  useEffect(
+    () => {
+      if (topOffset) {
+        listRef.current.scrollTop = topOffset
+      } else if (bottomOffset) {
+        console.log(listRef.current.scrollHeight)
+        listRef.current.scrollTop =
+          listRef.current.scrollHeight -
+          listRef.current.clientHeight -
+          bottomOffset
+      }
+    },
+    [listRef, topOffset, bottomOffset]
+  )
+
   return { listRef, topSentinelRef, bottomSentinelRef }
 }
 
-export default ({ className, children, topCallback, bottomCallback }) => {
+export default ({
+  className,
+  children,
+  topOffset,
+  topCallback,
+  topObserverOptions,
+  bottomOffset,
+  bottomCallback,
+  bottomObserverOptions
+}) => {
   const { listRef, topSentinelRef, bottomSentinelRef } = useInfiniteScroll({
+    topOffset,
     topCallback,
-    bottomCallback
+    topObserverOptions,
+    bottomOffset,
+    bottomCallback,
+    bottomObserverOptions
   })
 
   return children({ listRef, topSentinelRef, bottomSentinelRef })
