@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/shiminshen/react-sentinel-infinite-scroll"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.10.1",
     "react-dom": "^16.10.1"
   },
