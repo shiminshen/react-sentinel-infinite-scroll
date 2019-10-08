@@ -9,14 +9,6 @@ before_deploy:
   - npm run build
   - npm run publish:npm
 deploy:
-  - provider: releases
-    api_key: $GITHUB_TOKEN
-    skip_cleanup: true
-    file:
-      - './lib/index.js'
-      - './package.json'
-    on:
-      tags: true
   - provider: pages
     local_dir: './build'
     skip_cleanup: true
@@ -28,4 +20,14 @@ deploy:
     email: smshen17@gmail.com
     api_key: $NPM_TOKEN
     on:
+      node_js: 'stable'
+      tags: true
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    file:
+      - './lib/index.js'
+      - './package.json'
+    on:
+      node_js: 'stable'
       tags: true
