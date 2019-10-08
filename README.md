@@ -9,10 +9,22 @@ Demo Code
 ---
 
 ```javascript
-import React, { useState, useEffect } from 'react'
-import InfiniteScroll from 'react-sentinel-infinit-scroll'
+import React, { useState } from 'react'
+import InfiniteScroll, { useInfiniteScroll } from './SentinelInfiniteScroll'
 
 const InfiniteScrollExample = () => {
+  const [list, setList] = useState([
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+  ])
   const topCallback = (listRef, sentinelRef, setIsFetching) => {
     fetchMockData('topAddItem').then(data => {
       const originScrollHeight = listRef.current.scrollHeight
@@ -32,27 +44,69 @@ const InfiniteScrollExample = () => {
     })
   }
 
-  const [enable, setEnable] = useState(false)
-
-  useEffect(() => {
-    const listDom  = document.getElementsByClassName('list')[0]
-    setEnable(true)
-    listDom.scrollIntoView()
-  }, [])
-
-  const stopLoading = list.length > 15 && list.length < 20
+  const { listRef, topSentinelRef, bottomSentinelRef } = useInfiniteScroll({
+    topOffset: 30,
+    topCallback,
+    bottomCallback
+  })
 
   return (
-    <InfiniteScroll topCallback={topCallback} bottomCallback={bottomCallback}>
+    <div ref={listRef} style={{ height: '200px', width: '200px', overflow: 'auto' }}>
+      <div ref={topSentinelRef}>Loading</div>
+      <div className='list'>
+        {list.map((item, idx) => (
+          <div key={idx}>{item}</div>
+        ))}
+      </div>
+      <div ref={bottomSentinelRef}>Loading</div>
+    </div>
+  )
+}
+
+const InfiniteScrollExample2 = () => {
+  const [list, setList] = useState([
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+    'test',
+  ])
+
+  const topCallback = (listRef, sentinelRef, setIsFetching) => {
+    fetchMockData('topAddItem').then(data => {
+      const originScrollHeight = listRef.current.scrollHeight
+      setList(list => [data, ...list])
+      listRef.current.scrollTop =
+        listRef.current.scrollTop +
+        listRef.current.scrollHeight -
+        originScrollHeight
+      setIsFetching(false)
+    })
+  }
+
+  const bottomCallback = (listRef, sentinelRef, setIsFetching) => {
+    fetchMockData().then(data => {
+      setList(list => [...list, data])
+      setIsFetching(false)
+    })
+  }
+
+  return (
+    <InfiniteScroll topOffset={30} topCallback={topCallback} bottomCallback={bottomCallback}>
       {({ listRef, topSentinelRef, bottomSentinelRef }) => (
-        <div ref={listRef} style={{ height: '200px', overflow: 'auto' }}>
-          {enable && !stopLoading && <div ref={topSentinelRef}>Loading</div>}
+        <div ref={listRef} style={{ height: '200px', width: '200px', overflow: 'auto' }}>
+          <div ref={topSentinelRef}>Loading</div>
           <div className='list'>
             {list.map((item, idx) => (
               <div key={idx}>{item}</div>
             ))}
           </div>
-          {<div ref={bottomSentinelRef}>Loading</div>}
+          <div ref={bottomSentinelRef}>Loading</div>
         </div>
       )}
     </InfiniteScroll>
