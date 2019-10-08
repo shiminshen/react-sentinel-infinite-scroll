@@ -1,6 +1,6 @@
 {
   "name": "react-sentinel-infinite-scroll",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://shiminshen.github.io/react-sentinel-infinite-scroll",
   "private": false,
   "main": "lib/index.js",
