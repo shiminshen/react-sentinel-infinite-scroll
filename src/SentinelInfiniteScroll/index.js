@@ -57,7 +57,6 @@ export const useInfiniteScroll = ({
       if (topOffset) {
         listRef.current.scrollTop = topOffset
       } else if (bottomOffset) {
-        console.log(listRef.current.scrollHeight)
         listRef.current.scrollTop =
           listRef.current.scrollHeight -
           listRef.current.clientHeight -

@@ -1,5 +1,6 @@
 react-sentinel-infinite-scroll
 ===
+[![npm version](https://badge.fury.io/js/react-sentinel-infinite-scroll.svg)](https://badge.fury.io/js/react-sentinel-infinite-scroll)
 [![Build Status](https://travis-ci.org/shiminshen/react-sentinel-infinite-scroll.svg?branch=master)](https://travis-ci.org/shiminshen/react-sentinel-infinite-scroll)
 
 React hook based infinite scroll by sentinel
@@ -40,7 +41,6 @@ const InfiniteScrollExample = () => {
   }, [])
 
   const stopLoading = list.length > 15 && list.length < 20
-  console.log('render');
 
   return (
     <InfiniteScroll topCallback={topCallback} bottomCallback={bottomCallback}>
