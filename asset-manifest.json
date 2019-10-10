@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/react-sentinel-infinite-scroll/static/css/main.5d4b1c33.chunk.css",
+    "main.js": "/react-sentinel-infinite-scroll/static/js/main.b232a029.chunk.js",
+    "main.js.map": "/react-sentinel-infinite-scroll/static/js/main.b232a029.chunk.js.map",
+    "runtime-main.js": "/react-sentinel-infinite-scroll/static/js/runtime-main.7b8af74c.js",
+    "runtime-main.js.map": "/react-sentinel-infinite-scroll/static/js/runtime-main.7b8af74c.js.map",
+    "static/js/2.edddd227.chunk.js": "/react-sentinel-infinite-scroll/static/js/2.edddd227.chunk.js",
+    "static/js/2.edddd227.chunk.js.map": "/react-sentinel-infinite-scroll/static/js/2.edddd227.chunk.js.map",
+    "index.html": "/react-sentinel-infinite-scroll/index.html",
+    "precache-manifest.a76e5e07fc9642df79a57c6c3d5cfda8.js": "/react-sentinel-infinite-scroll/precache-manifest.a76e5e07fc9642df79a57c6c3d5cfda8.js",
+    "service-worker.js": "/react-sentinel-infinite-scroll/service-worker.js",
+    "static/css/main.5d4b1c33.chunk.css.map": "/react-sentinel-infinite-scroll/static/css/main.5d4b1c33.chunk.css.map",
+    "static/media/logo.svg": "/react-sentinel-infinite-scroll/static/media/logo.25bf045c.svg"
+  }
+}
