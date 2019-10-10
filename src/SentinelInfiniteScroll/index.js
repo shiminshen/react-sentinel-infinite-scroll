@@ -33,22 +33,35 @@ export const useInfiniteScroll = ({
 }) => {
   const listRef = useRef()
 
-  const topSentinelRef = useSentinel((onScreen, isFetching, setIsFetching) => {
-    if (!isFetching && onScreen) {
-      setIsFetching(true)
-      topCallback && topCallback(listRef, topSentinelRef, setIsFetching)
-    }
-  }, topObserverOptions)
-
-  const bottomSentinelRef = useSentinel(
-    (onScreen, isFetching, setIsFetching) => {
+  const topSentinelRef = useSentinel(
+    async (onScreen, isFetching, setIsFetching) => {
       if (!isFetching && onScreen) {
         setIsFetching(true)
-        bottomCallback &&
-          bottomCallback(listRef, bottomSentinelRef, setIsFetching)
+        const originScrollHeight = listRef.current.scrollHeight
+        if (topCallback) {
+          await topCallback(listRef, topSentinelRef, setIsFetching)
+          listRef.current.scrollTop =
+            listRef.current.scrollTop +
+            listRef.current.scrollHeight -
+            originScrollHeight
+        }
+        return setIsFetching(false)
       }
     },
-    bottomObserverOptions
+    { root: listRef.current, ...topObserverOptions }
+  )
+
+  const bottomSentinelRef = useSentinel(
+    async (onScreen, isFetching, setIsFetching) => {
+      if (!isFetching && onScreen) {
+        setIsFetching(true)
+        if (bottomCallback) {
+          await bottomCallback(listRef, bottomSentinelRef, setIsFetching)
+          setIsFetching(false)
+        }
+      }
+    },
+    { root: listRef.current, ...bottomObserverOptions }
   )
 
   // layout offset while did mount if necessary
